@@ -1,14 +1,18 @@
+import pandas as pd
+
+# To reach .env Spotify API credentials
 import os
 import requests
-import pandas as pd
 from dotenv import load_dotenv
 
+# For lyrics
 import lyricsgenius
 from getpass import getpass
+import numpy as np
+
+# For sentiment analysis
 import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
-
-import numpy as np
 
 # Insert Genius token (in case it expires: https://genius.com/api-clients)
 genius_token = getpass()
@@ -38,6 +42,7 @@ def spotifyToken ():
     except:
         print("The request did not go through: wrong credentials!")
 
+# SPOTIFY TOKEN AND QUERY HEADER:
 token  = spotifyToken()
 
 def query_header (token):
@@ -74,6 +79,7 @@ def playlist_response ():
 
 response = playlist_response()
 
+# TRACK ITEMS (NAME, ARTIST, POPULARITY AND SONG ID)
 def track_items ():
     
     tracks = response['tracks']['items']
@@ -89,6 +95,7 @@ def track_items ():
 
 track_items_dict = track_items ()
 
+# SONG AUDIO FEATURES
 def track_audio_features ():
     audio_features_request_base = "https://api.spotify.com/v1/audio-features/"
     request_list = [audio_features_request_base + track_items_dict['Song ID'][i] for i in range(len(track_items_dict['Song ID']))]
@@ -109,6 +116,7 @@ def track_audio_features ():
 
 track_items_dict = track_audio_features ()
 
+# SONG LYRICS
 def get_lyrics():
     lyrics_list = []
     for i in range(len(track_items_dict['Name'])):
@@ -124,8 +132,34 @@ def get_lyrics():
     track_items_dict['Lyrics'] = lyrics_list
     return track_items_dict
     
-
+# SONG LYRICS SENTIMENT ANALYSIS
+sia = SentimentIntensityAnalyzer()
 
 def track_sentiment ():
-    pass
+    positive = []
+    negative = []
+    neutral = []
+    compound = []
+
+    for i in range(len(track_items_dict['Lyrics'])):
+        try:
+            sentiment_analysis = sia.polarity_scores(track_items_dict['Lyrics'][i])
+            positive.append(sentiment_analysis['pos'])
+            neutral.append(sentiment_analysis['neu'])
+            negative.append(sentiment_analysis['neg'])
+            compound.append(sentiment_analysis['compound'])
+        except:
+            positive.append(np.nan)
+            neutral.append(np.nan)
+            negative.append(np.nan)
+            compound.append(np.nan)
+
+    track_items_dict['Positive'] = positive
+    track_items_dict['Neutral'] = neutral
+    track_items_dict['Negative'] = negative
+    track_items_dict['Compound'] = compound
+
+    return track_items_dict
+
+
 
