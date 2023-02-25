@@ -30,4 +30,8 @@ Create a Dataframe storing Playlist relevant information
 1. Define song emotions
 - Create visualizations on that
 
+1.1. Suggest according to emotion:
+https://developer.spotify.com/documentation/web-api/reference/#/operations/get-recommendations
+
 2. Compare two different playlist and run some Hypotheses testing on similarity (e.g. on Top Hits per Country), and judge common points on different countries' musical tastes.
+
