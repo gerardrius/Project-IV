@@ -10,6 +10,9 @@ import lyricsgenius
 from getpass import getpass
 import numpy as np
 
+import re
+import string
+
 # For sentiment analysis
 import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
@@ -116,6 +119,23 @@ def track_audio_features ():
 
 track_items_dict = track_audio_features ()
 
+
+# CLEAN LYRICS
+def clean_lyrics(lyrics):
+    # Remove text in square brackets
+    lyrics = re.sub(r'\[.*?\]', '', lyrics)
+    
+    # Remove text in parentheses
+    lyrics = re.sub(r'\(.*?\)', '', lyrics)
+    
+    # Remove blank lines
+    lyrics = os.linesep.join([s for s in lyrics.splitlines() if s])
+    
+    # Remove leading/trailing whitespace characters
+    lyrics = lyrics.strip()
+    
+    return lyrics
+
 # SONG LYRICS
 def get_lyrics():
     lyrics_list = []
@@ -123,7 +143,7 @@ def get_lyrics():
         song = genius.search_song(track_items_dict['Name'][i], track_items_dict['Artist'][i])
         if song is not None:
             try:
-                lyrics_list.append(song.lyrics)
+                lyrics_list.append(clean_lyrics(song.lyrics))
             except:
                 lyrics_list.append(np.nan)
         else:
@@ -131,7 +151,8 @@ def get_lyrics():
     
     track_items_dict['Lyrics'] = lyrics_list
     return track_items_dict
-    
+
+
 # SONG LYRICS SENTIMENT ANALYSIS
 sia = SentimentIntensityAnalyzer()
 
@@ -161,5 +182,4 @@ def track_sentiment ():
 
     return track_items_dict
 
-
-
+# SONG TOPIC RECOGNITION

@@ -10,7 +10,7 @@ Genius getLyrics API: for sentiment analysis (positiveness, negativeness, neutra
 
 
 Objective of Data Obtention:
-Create a Dataframe storing Playlist relevant information
+### Create a Dataframe storing Playlist relevant information
 - Name
 - Artist
 - Album
@@ -24,7 +24,14 @@ Create a Dataframe storing Playlist relevant information
     - Liveness
     - Tempo
     - etc.
-- 
+- Lyrics
+- Sentiment Analysis
+- Main topic of the song (love, )***
+
+
+### Pandas Dataframe to CSV -> import data in MySQL Workbench
+
+### Visualizations
 
 
 1. Define song emotions
