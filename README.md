@@ -30,6 +30,10 @@ Objective of Data Obtention:
 
 
 ### Pandas Dataframe to CSV -> import data in MySQL Workbench
+- Set a connection with MySQL Workbench
+- Create a new database
+- Export the Dataframe into a new table in the dataset
+
 
 ### Visualizations
 
