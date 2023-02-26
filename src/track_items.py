@@ -1,92 +1,9 @@
-import pandas as pd
-
-# To reach .env Spotify API credentials
-import os
 import requests
-from dotenv import load_dotenv
-
-# For lyrics
-import lyricsgenius
-from getpass import getpass
-import numpy as np
-
 import re
-import string
+import
 
-# For sentiment analysis
 import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
-
-# For linking the resulting Dataframe with MySQL workbench
-import mysql.connector as msql
-from mysql.connector import Error
-import pymysql
-import sqlalchemy as alch
-
-# Insert Genius token (in case it expires: https://genius.com/api-clients)
-genius_token = getpass()
-genius = lyricsgenius.Genius(genius_token)
-
-# Example Playlist link:
-playlist_link = 'https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M?si=b705194596334305'
-
-def spotifyToken ():
-    """This function refreshes a token for a given app on Spotify
-    returns: token as a string
-    """
-
-    # 1. Defining: credentials fot the app
-    client_id = os.getenv("id")
-    client_secret = os.getenv("secret")
-    
-    #2. Request
-    body_params = {"grant_type":"client_credentials"}
-    url = "https://accounts.spotify.com/api/token"
-    response = requests.post(url, data=body_params, auth=(client_id,client_secret))
-    
-    try:
-        token = response.json()["access_token"]
-        return token
-
-    except:
-        print("The request did not go through: wrong credentials!")
-
-# SPOTIFY TOKEN AND QUERY HEADER:
-token  = spotifyToken()
-
-def query_header (token):
-    return {"Authorization":f"Bearer {token}"}
-
-headers = query_header (token)
-
-# PLAYLIST RESPONSE
-def playlist_id ():
-    """
-    Function that provides the id of a playlist to put it together with the base URL.
-    """
-    return playlist_link.split("/")[-1].split("?")[0]
-
-def playlist_query ():
-    """
-    Function that returns the actual query to be passed into the Spotify API request.
-    Accepts the whole playlist url, takes the id and adds it to base URL to
-    return the actual query.
-    """
-    url_base = "https://api.spotify.com/v1/playlists/"
-    return url_base + playlist_id()
-
-query = playlist_query ()
-
-def playlist_response ():
-    """
-    Provides the response from Spotify API in json format
-    Takes the query to be passed to the API
-    and returns a response with the playlist items.
-    """
-    response = requests.get(query, headers=headers).json()
-    return response
-
-response = playlist_response()
 
 # TRACK ITEMS (NAME, ARTIST, POPULARITY AND SONG ID)
 def track_items ():
@@ -187,28 +104,3 @@ def track_sentiment ():
     track_items_dict['Compound'] = compound
 
     return track_items_dict
-
-# SONG TOPIC RECOGNITION
-
-
-
-# SAVE DATAFRAME AS CSV TO IMPORT IT TO MYSQL WORKBENCH:
-df = pd.DataFrame(track_items_dict)
-
-def dataframe_to_sql ():
-    passwd = os.getenv('sql_pw')
-    dbName = 'spotify'
-
-    try:
-        conn = msql.connect(host='localhost', user='root', password=passwd)
-        if conn.is_connected():
-            cursor = conn.cursor()
-            cursor.execute(f"CREATE DATABASE IF NOT EXISTS {dbName}")
-            print("Database is created")
-    except Error as e:
-        print("Error while connecting to MySQL", e)
-
-    connectionData=f"mysql+pymysql://root:{passwd}@localhost/{dbName}"
-    engine = alch.create_engine(connectionData)
-
-    df.to_sql(name='playlist_items', con=engine, if_exists='replace', index=False)
