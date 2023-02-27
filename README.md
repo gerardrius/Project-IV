@@ -5,11 +5,11 @@ Fourth Project of the Data Analysis Bootcamp
 
 ## Introduction
 
-This project aims to provide an analysis of the set of tracks that conform any given Spotify playlist. It covers the musical dimension of songs, through audio features, and their lyrics, by a sentiment analysis approach.
+This project aims to provide an analysis of the set of tracks that conform any given Spotify Playlist. It covers the musical dimension of songs, through audio features, and their lyrics, by a sentiment analysis approach.
 
-The process to obtain data has been developed in base to three powerful resources: the Spotify and Genius APIs, from which we obtained playlist and lyrics information respectively (1)(2).
+The process to obtain data has been developed in base to three powerful resources: the Spotify and Genius APIs, from which we obtained Playlist and lyrics information respectively (1)(2).
 
-Also, a supervised Machine Learning model has been developed to detect and classify the musical genre of playlist's songs according to audio features and thus add value to the information provided by the two mentioned APIs.
+Also, a supervised Machine Learning model has been developed to detect and classify the musical genre of Playlist's songs according to audio features and thus add value to the information provided by the two mentioned APIs.
 
 ---
 
@@ -41,7 +41,7 @@ Once credentials are set and a Playlist link has been passed, the app is set to 
 Response processing has three steps.
 
 ### 1. Track related data from response
-First, we create a dictionary with the first relevant data; Name, Artist, Song ID and Popularity. We set this data as keys, and values are the corresponding data for the number of songs in the playlist.
+First, we create a dictionary with the first relevant data; Name, Artist, Song ID and Popularity. We set this data as keys, and values are the corresponding data for the number of songs in the Playlist.
 
 ### 2. Audio features
 Another query to the Spotify API is made, now with a different endpoint specific for audio features. To get those attributes, we query for each song by iterating the Song ID obtained in the previous step (the ID must be included in the endpoint). More on this, we add the result for each audio attribute as a key, value pair in the existing dictionary, being the attribute the key, and the list of scores for each song the value.
@@ -77,17 +77,26 @@ To present data in a visual way, we have made some queries to the table stored i
 ## Tableau Visualizations
 
 ### Relevant audio features per genre.
+
 https://public.tableau.com/app/profile/gerard.rius/viz/Relevantaudiofeaturesbygenre/Historia1
 
 
+### Genre popularity and sentiment.
+
+https://public.tableau.com/app/profile/gerard.rius/viz/Genrepopularityandsentiment/Historia2?publish=yes
 
 
+
+--- 
+
+Note: In main.ipynb, you can input any Playlist link and conduct the analysis to it. Next steps for the project include a functionality that suggests tracks within the playlist according to sentiment and/or desired genre.
 
 ---
 
 ## Data sources
 
 Spotify Developer API (1)
+
 https://developer.spotify.com/documentation/web-api/
 
 Genius API (2)
