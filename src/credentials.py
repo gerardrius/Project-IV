@@ -205,7 +205,8 @@ def track_sentiment ():
 
     return track_items_dict
 
-# SONG TOPIC RECOGNITION
+# SONG EMOTIONS RECOGNITION
+# https://news.berkeley.edu/2020/01/06/music-evokes-13-emotions/
 
 
 
