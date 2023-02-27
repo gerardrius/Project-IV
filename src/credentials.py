@@ -9,20 +9,6 @@ load_dotenv()
 
 # For lyrics
 import lyricsgenius
-from getpass import getpass
-
-import re
-import string
-
-# For sentiment analysis
-import nltk
-from nltk.sentiment import SentimentIntensityAnalyzer
-
-# For linking the resulting Dataframe with MySQL workbench
-import mysql.connector as msql
-from mysql.connector import Error
-import pymysql
-import sqlalchemy as alch
 
 # Example Playlist link:
 playlist_link = 'https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M?si=b705194596334305'
