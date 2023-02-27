@@ -1,5 +1,8 @@
 # PLAYLIST RESPONSE
-def playlist_id ():
+import requests
+from src.creds import *
+
+def playlist_id (playlist_link = 'https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M?si=b705194596334305'):
     """
     Function that provides the id of a playlist to put it together with the base URL.
     """

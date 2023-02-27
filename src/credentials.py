@@ -106,7 +106,7 @@ def playlist_response ():
 response = playlist_response()
 
 # TRACK ITEMS (NAME, ARTIST, POPULARITY AND SONG ID)
-def track_items ():
+def track_items (response):
     
     tracks = response['tracks']['items']
 
@@ -205,13 +205,13 @@ def track_sentiment ():
 
     return track_items_dict
 
-# SONG EMOTIONS RECOGNITION
+# SONG GENRE RECOGNITION
 # https://news.berkeley.edu/2020/01/06/music-evokes-13-emotions/
 
 
 
 # SAVE DATAFRAME AS CSV TO IMPORT IT TO MYSQL WORKBENCH:
-df = pd.DataFrame(track_items_dict)
+spotify_df = pd.DataFrame(track_items_dict)
 
 def dataframe_to_sql ():
     passwd = os.getenv('sql_pw')
@@ -229,4 +229,4 @@ def dataframe_to_sql ():
     connectionData=f"mysql+pymysql://root:{passwd}@localhost/{dbName}"
     engine = alch.create_engine(connectionData)
 
-    df.to_sql(name='playlist_items', con=engine, if_exists='replace', index=False)
+    spotify_df.to_sql(name='playlist_items', con=engine, if_exists='replace', index=False)

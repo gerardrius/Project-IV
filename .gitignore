@@ -2,3 +2,6 @@
 .DS_Store
 
 .DS_Store
+src.__pycache__
+
+new_genre_mode_spotify_project
