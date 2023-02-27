@@ -26,7 +26,7 @@ Objective of Data Obtention:
     - etc.
 - Lyrics
 - Sentiment Analysis
-- Main topic of the song (love, )***
+- Genre classifier
 
 
 ### Pandas Dataframe to CSV -> import data in MySQL Workbench
