@@ -1,7 +1,9 @@
-# Project-IV
-Fourth Project of the Data Analysis Bootcamp
+### **Project-IV: Extraction | SQL | NLTK | Tableau**
 
---- 
+---
+
+# SPOTIFY PLAYLIST ANALYSIS
+
 
 ## Introduction
 
@@ -86,10 +88,13 @@ https://public.tableau.com/app/profile/gerard.rius/viz/Relevantaudiofeaturesbyge
 https://public.tableau.com/app/profile/gerard.rius/viz/Genrepopularityandsentiment/Historia2?publish=yes
 
 
+### Artist relevance, popularity and sentiment.
+
+https://public.tableau.com/app/profile/gerard.rius/viz/Artistrelevancepopularityandsentimentanalysis/Historia3
 
 --- 
 
-Note: In main.ipynb, you can input any Playlist link and conduct the analysis to it. Next steps for the project include a functionality that suggests tracks within the playlist according to sentiment and/or desired genre.
+Note: in main.ipynb, any Playlist link can be used to conduct the analysis. Next steps for the project include a functionality that suggests tracks within the playlist according to sentiment and/or desired genre.
 
 ---
 
@@ -105,4 +110,4 @@ https://genius.com/api-clients
 
 Kaggle Audio Features and Genre (3)
 
-(https://www.kaggle.com/datasets/naoh1092/spotify-genre-audio-features) 
+(https://www.kaggle.com/datasets/naoh1092/spotify-genre-audio-features)
