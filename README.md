@@ -8,6 +8,13 @@ Spotipy Audio Features (by song URI): for audio features analysis, e.g. danceabi
 Genius getLyrics API: for sentiment analysis (positiveness, negativeness, neutrality and compound)
 : sentiment analysis to human emotion
 
+Order:
+1. Credentials
+2. Response
+3. Track Items
+4. Genre Classifier
+5. SQL Connection
+
 
 Objective of Data Obtention:
 ### Create a Dataframe storing Playlist relevant information

@@ -1,5 +1,5 @@
 import pandas as pd
-import src.creds as cred
+import src.credentials as cred
 import src.response as resp
 import src.track_items as track
 import src.genre_classifier as genre

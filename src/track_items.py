@@ -6,7 +6,7 @@ import numpy as np
 import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
 
-import src.creds as cred
+import src.credentials as cred
 genius = cred.lyricsgenius.Genius(cred.geniusToken())
 spotify_token  = cred.spotifyToken()
 headers = cred.query_header (spotify_token)

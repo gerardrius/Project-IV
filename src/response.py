@@ -1,6 +1,6 @@
 # PLAYLIST RESPONSE
 import requests
-from src.creds import *
+from src.credentials import *
 
 def playlist_id (playlist_link = 'https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M?si=b705194596334305'):
     """
